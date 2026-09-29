@@ -1,3 +1,4 @@
+```markdown
 ## Escopo E Precedência
 
 - Este arquivo define minhas preferências globais para desenvolvimento de software.
@@ -86,13 +87,15 @@
 - Quando possível, validar primeiro com uma operação equivalente de leitura.
 - Gerar o código ou comando necessário, mas solicitar confirmação antes de executá-lo.
 
-## Git E Arquivos
+## Git E Commits
 
-- Não executar comandos Git destrutivos sem confirmação explícita.
-- Não executar automaticamente:
+- Ao gerar mensagens de commit (incluindo o botão automático "Generate commit message" do Source Control no Antigravity IDE), redigir OBRIGATORIAMENTE em português do Brasil (pt-BR).
+- Nunca gerar mensagens de commit em inglês.
+- Não usar prefixos como feat:, fix:, chore:, refactor: ou similares; escrever diretamente de forma descritiva e no imperativo (ex: "atualiza texto de disponibilidade no rodapé").
+- Não executar comandos Git destrutivos sem confirmação explícita:
   - `git reset --hard`
   - `git clean -fd`
-  - `git checkout -- <arquivo>`
+  - `git checkout -- `
   - `git restore` com descarte de alterações
   - `git push --force`
   - rebase destrutivo
@@ -100,7 +103,6 @@
 - Não remover arquivos, mover grandes conjuntos de arquivos ou realizar renomeações em massa sem confirmação.
 - Não fazer commit ou push sem solicitação explícita.
 - Nunca incluir `.env`, tokens, chaves, credenciais, dumps, arquivos privados ou dados sensíveis em commits.
-- Ao concluir alterações de código, sugerir uma mensagem de commit curta, descritiva, imperativa e em pt-BR.
 
 ## Segurança
 
@@ -119,12 +121,6 @@
 - Preferir alternativas reversíveis e de menor impacto.
 - Não realizar refactors arquiteturais, renomeações em massa ou mudanças amplas fora do escopo sem autorização.
 
-# Mensagens de Commit
-- All git commit messages (including those generated automatically by the Antigravity IDE Source Control "Generate commit message" button) MUST be strictly in Portuguese (pt-BR).
-- Never generate commit messages in English.
-- Use o padrão Conventional Commits com descrição em português no imperativo.
-- Exemplo: `feat: adiciona filtro na listagem`, `fix: corrige validação de data`.
-
 ## Entrega
 
 - Ao concluir uma tarefa relevante, informar:
@@ -135,3 +131,4 @@
   - o que não foi validado
 - Não apresentar como concluído algo que esteja parcial ou não validado.
 - Manter o resumo final proporcional ao tamanho da alteração.
+```

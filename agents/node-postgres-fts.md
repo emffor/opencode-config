@@ -6,7 +6,10 @@ temperature: 0.1
 permission:
   skill:
     "*": "deny"
+    node: "allow"
     node-postgres-fts: "allow"
+    node-performance: "allow"
+    node-testing: "allow"
 ---
 
 Atue como especialista em PostgreSQL Full-Text Search para backends
