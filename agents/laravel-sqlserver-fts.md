@@ -1,15 +1,26 @@
 ---
 description: Especialista em Full-Text Search Laravel com SQL Server.
 mode: subagent
-temperature: 0.1
 
-permission:
-  skill:
-    "*": "deny"
-    laravel: "allow"
-    laravel-sqlserver-fts: "allow"
-    laravel-performance: "allow"
-    laravel-testing: "allow"
+permissions:
+  - action: "skill"
+    resource: "*"
+    effect: "deny"
+  - action: "skill"
+    resource: "laravel"
+    effect: "allow"
+  - action: "skill"
+    resource: "laravel-sqlserver-fts"
+    effect: "allow"
+  - action: "skill"
+    resource: "laravel-performance"
+    effect: "allow"
+  - action: "skill"
+    resource: "laravel-testing"
+    effect: "allow"
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em SQL Server Full-Text Search com Laravel.

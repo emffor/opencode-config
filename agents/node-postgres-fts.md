@@ -1,15 +1,26 @@
 ---
 description: Especialista em PostgreSQL Full-Text Search para backends Node.js/TypeScript com TypeORM.
 mode: subagent
-temperature: 0.1
 
-permission:
-  skill:
-    "*": "deny"
-    node: "allow"
-    node-postgres-fts: "allow"
-    node-performance: "allow"
-    node-testing: "allow"
+permissions:
+  - action: "skill"
+    resource: "*"
+    effect: "deny"
+  - action: "skill"
+    resource: "node"
+    effect: "allow"
+  - action: "skill"
+    resource: "node-postgres-fts"
+    effect: "allow"
+  - action: "skill"
+    resource: "node-performance"
+    effect: "allow"
+  - action: "skill"
+    resource: "node-testing"
+    effect: "allow"
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em PostgreSQL Full-Text Search para backends

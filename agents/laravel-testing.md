@@ -1,13 +1,20 @@
 ---
 description: Especialista em testes automatizados Laravel com PHPUnit e Pest.
 mode: subagent
-temperature: 0.1
 
-permission:
-  skill:
-    "*": "deny"
-    laravel: "allow"
-    laravel-testing: "allow"
+permissions:
+  - action: "skill"
+    resource: "*"
+    effect: "deny"
+  - action: "skill"
+    resource: "laravel"
+    effect: "allow"
+  - action: "skill"
+    resource: "laravel-testing"
+    effect: "allow"
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em testes Laravel.

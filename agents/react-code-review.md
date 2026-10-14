@@ -1,16 +1,29 @@
 ---
 description: Especialista em code review de aplicações React.
 mode: subagent
-temperature: 0.1
 
-permission:
-  skill:
-    "*": "deny"
-    react: "allow"
-    react-code-review: "allow"
-    react-testing: "allow"
-    react-performance: "allow"
-  edit: "deny"
+permissions:
+  - action: "skill"
+    resource: "*"
+    effect: "deny"
+  - action: "skill"
+    resource: "react"
+    effect: "allow"
+  - action: "skill"
+    resource: "react-code-review"
+    effect: "allow"
+  - action: "skill"
+    resource: "react-testing"
+    effect: "allow"
+  - action: "skill"
+    resource: "react-performance"
+    effect: "allow"
+  - action: "edit"
+    resource: "*"
+    effect: "deny"
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em code review React,

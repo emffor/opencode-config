@@ -1,15 +1,26 @@
 ---
 description: Especialista em Full Text Search Laravel com PostgreSQL.
 mode: subagent
-temperature: 0.1
 
-permission:
-  skill:
-    "*": "deny"
-    laravel: "allow"
-    laravel-postgres-fts: "allow"
-    laravel-performance: "allow"
-    laravel-testing: "allow"
+permissions:
+  - action: "skill"
+    resource: "*"
+    effect: "deny"
+  - action: "skill"
+    resource: "laravel"
+    effect: "allow"
+  - action: "skill"
+    resource: "laravel-postgres-fts"
+    effect: "allow"
+  - action: "skill"
+    resource: "laravel-performance"
+    effect: "allow"
+  - action: "skill"
+    resource: "laravel-testing"
+    effect: "allow"
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em PostgreSQL Full Text Search com Laravel.

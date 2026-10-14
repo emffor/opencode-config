@@ -1,15 +1,26 @@
 ---
 description: Especialista em Full-Text Search Node.js/TypeScript com SQL Server.
 mode: subagent
-temperature: 0.1
 
-permission:
-  skill:
-    "*": "deny"
-    node: "allow"
-    node-sqlserver-fts: "allow"
-    node-performance: "allow"
-    node-testing: "allow"
+permissions:
+  - action: "skill"
+    resource: "*"
+    effect: "deny"
+  - action: "skill"
+    resource: "node"
+    effect: "allow"
+  - action: "skill"
+    resource: "node-sqlserver-fts"
+    effect: "allow"
+  - action: "skill"
+    resource: "node-performance"
+    effect: "allow"
+  - action: "skill"
+    resource: "node-testing"
+    effect: "allow"
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em SQL Server Full-Text Search com Node.js e TypeScript.

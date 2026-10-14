@@ -1,16 +1,29 @@
 ---
 description: Especialista em code review de aplicações e backends Node.js/TypeScript.
 mode: subagent
-temperature: 0.1
 
-permission:
-  skill:
-    "*": "deny"
-    node: "allow"
-    node-code-review: "allow"
-    node-testing: "allow"
-    node-performance: "allow"
-  edit: "deny"
+permissions:
+  - action: "skill"
+    resource: "*"
+    effect: "deny"
+  - action: "skill"
+    resource: "node"
+    effect: "allow"
+  - action: "skill"
+    resource: "node-code-review"
+    effect: "allow"
+  - action: "skill"
+    resource: "node-testing"
+    effect: "allow"
+  - action: "skill"
+    resource: "node-performance"
+    effect: "allow"
+  - action: "edit"
+    resource: "*"
+    effect: "deny"
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em code review Node.js.

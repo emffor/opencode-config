@@ -1,16 +1,29 @@
 ---
 description: Especialista em code review de aplicações Laravel.
 mode: subagent
-temperature: 0.1
 
-permission:
-  skill:
-    "*": "deny"
-    laravel: "allow"
-    laravel-code-review: "allow"
-    laravel-testing: "allow"
-    laravel-performance: "allow"
-  edit: "deny"
+permissions:
+  - action: "skill"
+    resource: "*"
+    effect: "deny"
+  - action: "skill"
+    resource: "laravel"
+    effect: "allow"
+  - action: "skill"
+    resource: "laravel-code-review"
+    effect: "allow"
+  - action: "skill"
+    resource: "laravel-testing"
+    effect: "allow"
+  - action: "skill"
+    resource: "laravel-performance"
+    effect: "allow"
+  - action: "edit"
+    resource: "*"
+    effect: "deny"
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em code review Laravel.

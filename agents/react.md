@@ -1,7 +1,9 @@
 ---
 description: Especialista em desenvolvimento, correção e refatoração de aplicações React.
 mode: subagent
-temperature: 0.1
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em React, JavaScript e TypeScript.

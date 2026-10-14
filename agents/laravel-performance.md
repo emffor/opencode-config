@@ -1,13 +1,20 @@
 ---
 description: Especialista em investigação e otimização de performance Laravel.
 mode: subagent
-temperature: 0.1
 
-permission:
-  skill:
-    "*": "deny"
-    laravel: "allow"
-    laravel-performance: "allow"
+permissions:
+  - action: "skill"
+    resource: "*"
+    effect: "deny"
+  - action: "skill"
+    resource: "laravel"
+    effect: "allow"
+  - action: "skill"
+    resource: "laravel-performance"
+    effect: "allow"
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em performance Laravel.

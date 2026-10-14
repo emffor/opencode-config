@@ -1,13 +1,20 @@
 ---
 description: Especialista em investigação e otimização de performance Node.js/TypeScript.
 mode: subagent
-temperature: 0.1
 
-permission:
-  skill:
-    "*": "deny"
-    node: "allow"
-    node-performance: "allow"
+permissions:
+  - action: "skill"
+    resource: "*"
+    effect: "deny"
+  - action: "skill"
+    resource: "node"
+    effect: "allow"
+  - action: "skill"
+    resource: "node-performance"
+    effect: "allow"
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em performance Node.js.

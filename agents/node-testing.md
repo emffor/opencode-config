@@ -1,13 +1,20 @@
 ---
 description: Especialista em testes automatizados Node.js e TypeScript com Vitest, Jest e runners nativos.
 mode: subagent
-temperature: 0.1
 
-permission:
-  skill:
-    "*": "deny"
-    node: "allow"
-    node-testing: "allow"
+permissions:
+  - action: "skill"
+    resource: "*"
+    effect: "deny"
+  - action: "skill"
+    resource: "node"
+    effect: "allow"
+  - action: "skill"
+    resource: "node-testing"
+    effect: "allow"
+request:
+  body:
+    temperature: 0.1
 ---
 
 Atue como especialista em testes Node.js.
