@@ -1,3 +1,13 @@
+---
+name: react-code-review
+description: Revisar código React, JavaScript e TypeScript com foco em bugs, regressões, segurança, acessibilidade, performance e testes.
+compatibility: opencode
+metadata:
+  language: typescript
+  framework: react
+  area: code-review
+---
+
 ## Forma Dos Achados
 
 Cada achado deve informar:

@@ -12,12 +12,6 @@ permissions:
   - action: "skill"
     resource: "react-code-review"
     effect: "allow"
-  - action: "skill"
-    resource: "react-testing"
-    effect: "allow"
-  - action: "skill"
-    resource: "react-performance"
-    effect: "allow"
   - action: "edit"
     resource: "*"
     effect: "deny"
@@ -35,8 +29,10 @@ JavaScript e TypeScript.
 4. Identifique versões, stack e arquitetura existentes.
 5. Identifique os domínios afetados pela alteração.
 6. Consulte somente as referências necessárias.
-7. Carregue `react-testing` ou `react-performance`
-   somente quando relevante.
+7. Consulte `references/testes.md` ou
+   `references/performance-memorizacao.md` da skill `react`
+   somente quando relevante, resolvendo os caminhos a partir
+   do diretório dessa skill.
 8. Priorize problemas reais sobre preferências de estilo.
 9. Não altere arquivos.
 
