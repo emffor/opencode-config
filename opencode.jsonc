@@ -11,6 +11,17 @@
         ],
         "disabled": false,
       },
+      "bitbucket-review-emfforserver": {
+        "type": "local",
+        "command": [
+          "ssh",
+          "emfforserver-local",
+          "/home/administrador/.nvm/versions/node/v20.18.2/bin/node",
+          "--env-file=/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/.env",
+          "/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/dist/index.js",
+        ],
+        "disabled": false,
+      },
     },
   },
 }
