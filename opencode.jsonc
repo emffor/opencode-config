@@ -6,8 +6,8 @@
         "type": "local",
         "command": [
           "node",
-          "--env-file=/Users/emffor/xxx/opencode-mcps/apps/bitbucket-mcp/.env",
-          "/Users/emffor/xxx/opencode-mcps/apps/bitbucket-mcp/dist/index.js",
+          "--env-file=/Users/emffor/xxx/mcp-suite/apps/bitbucket-mcp/.env",
+          "/Users/emffor/xxx/mcp-suite/apps/bitbucket-mcp/dist/index.js",
         ],
         "disabled": false,
       },
