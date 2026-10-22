@@ -20,6 +20,11 @@
           "--env-file=/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/.env",
           "/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/dist/index.js",
         ],
+        "disabled": true,
+      },
+      "rea": {
+        "type": "local",
+        "command": ["npx", "-y", "rea-agents@6.7.0", "mcp"],
         "disabled": false,
       },
     },
