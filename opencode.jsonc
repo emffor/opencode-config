@@ -6,8 +6,8 @@
         "type": "local",
         "command": [
           "node",
-          "--env-file=/Users/emffor/xxx/mcp-suite/apps/bitbucket-mcp/.env",
-          "/Users/emffor/xxx/mcp-suite/apps/bitbucket-mcp/dist/index.js",
+          "--env-file=/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/.env",
+          "/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/dist/index.js",
         ],
         "disabled": false,
       },
@@ -26,6 +26,18 @@
         "type": "local",
         "command": ["npx", "-y", "rea-agents@6.7.0", "mcp"],
         "disabled": false,
+      },
+      "pentest": {
+        "type": "local",
+        "command": [
+          "/home/administrador/.nvm/versions/node/v24.22.1/bin/node",
+          "/home/administrador/xxx/mcp-suite/apps/pentest-mcp/dist/index.js"
+        ],
+        "environment": {
+          "PENTEST_POLICY_FILE": "/home/administrador/.config/pentest-mcp/policy.json",
+          "PENTEST_DOCKER_SOCKET": "/var/run/docker.sock",
+          "TMPDIR": "/tmp/opencode"
+        }
       },
     },
   },

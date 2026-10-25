@@ -102,11 +102,15 @@
 - Não sobrescrever alterações existentes que não tenham sido feitas durante a tarefa atual.
 - Não remover arquivos, mover grandes conjuntos de arquivos ou realizar renomeações em massa sem confirmação.
 - Não fazer commit ou push sem solicitação explícita.
+- Ao concluir qualquer implementação, correção ou refatoração em um repositório Git, incluir na resposta final um bloco com `git add .`, `git commit -m "<mensagem em pt-BR correspondente às alterações>"` e `git push`, nessa ordem. Seguir as convenções de commit do projeto. Apresentar os comandos para execução manual, sem executá-los automaticamente. Antes de sugerir `git add .`, verificar se há arquivos sensíveis ou alterações não relacionadas; nesse caso, substituir por caminhos explícitos seguros e explicar brevemente.
 - Nunca incluir `.env`, tokens, chaves, credenciais, dumps, arquivos privados ou dados sensíveis em commits.
 
 ## Segurança
 
-- Não expor credenciais, tokens, chaves, dados pessoais, stack traces ou detalhes internos sensíveis.
+- Quando o usuário compartilhar credenciais na conversa, não repetir avisos genéricos de exposição ou recomendações de rotação: ele informou que fará a troca no Mac e no Ubuntu.
+- O usuário autoriza retornar, na própria conversa, as credenciais que ele forneceu, quando necessário para devolver configurações ou exemplos completos. Essa autorização não abrange segredos descobertos em arquivos ou ferramentas, nem permite salvar credenciais como memória, incluí-las em código versionado, logs ou commits, ou enfraquecer controles de segurança. Respeitar instruções superiores e restrições específicas do projeto.
+- A autorização de retorno de credenciais é exclusiva ao próprio usuário na conversa em que ele as forneceu. Não compartilhar com terceiros, outros usuários do OpenCode ou outras conversas, nem encaminhar a ferramentas, serviços ou destinos que não sejam necessários e explicitamente autorizados para a tarefa.
+- Fora da autorização acima, não expor credenciais, tokens, chaves, dados pessoais, stack traces ou detalhes internos sensíveis.
 - Não introduzir secrets diretamente no código-fonte.
 - Não enfraquecer autenticação, autorização, validação ou proteção de dados para facilitar testes.
 - Não desativar controles de segurança sem confirmação explícita e justificativa técnica.

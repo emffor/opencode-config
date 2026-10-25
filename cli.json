@@ -15,7 +15,11 @@
   "session": {
     "sidebar": "auto",
     "scrollbar": false,
-    "thinking": "hide"
+    "thinking": "hide",
+    "image_preview": true
   },
-  "animations": true
+  "animations": true,
+  "prompt": {
+    "image_preview": true
+  }
 }
