@@ -1,7 +1,11 @@
 {
+  // Comandos e caminhos dos MCPs do Mac.
+  // Para ligar/desligar, edite mcps-macos.json e execute node scripts/apply-mcps.mjs.
+  // O script gera opencode.jsonc e substitui os valores de disabled abaixo.
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
     "servers": {
+      // Bitbucket executado no Mac.
       "bitbucket-review": {
         "type": "local",
         "command": [
@@ -11,10 +15,12 @@
         ],
         "disabled": false,
       },
+      // Bitbucket executado no servidor via SSH (alternativa desabilitada).
       "bitbucket-review-emfforserver": {
         "type": "local",
         "command": [
           "ssh",
+          "-T",
           "emfforserver-local",
           "/home/administrador/.nvm/versions/node/v20.18.2/bin/node",
           "--env-file=/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/.env",
@@ -22,9 +28,43 @@
         ],
         "disabled": true,
       },
+      // Pentest executado no servidor via SSH, usando o Docker do servidor.
+      "pentest-mcp-emfforserver": {
+        "type": "local",
+        "command": [
+          "ssh",
+          "-T",
+          "emfforserver-local",
+          "/usr/bin/env",
+          "PENTEST_POLICY_FILE=/home/administrador/.config/pentest-mcp/policy.json",
+          "PENTEST_DOCKER_SOCKET=/var/run/docker.sock",
+          "TMPDIR=/tmp/opencode",
+          "PATH=/home/administrador/.nvm/versions/node/v24.22.1/bin:/usr/local/bin:/usr/bin:/bin",
+          "/home/administrador/.nvm/versions/node/v24.22.1/bin/node",
+          "/home/administrador/xxx/mcp-suite/apps/pentest-mcp/dist/index.js",
+        ],
+        "disabled": false,
+      },
+      // Engenharia reversa executada no Mac.
       "rea": {
         "type": "local",
         "command": ["npx", "-y", "rea-agents@6.7.0", "mcp"],
+        "disabled": false,
+      },
+      // Engenharia reversa executada no servidor via SSH.
+      "rea-emfforserver": {
+        "type": "local",
+        "command": [
+          "ssh",
+          "-T",
+          "emfforserver-local",
+          "/usr/bin/env",
+          "PATH=/home/administrador/.nvm/versions/node/v24.22.1/bin:/usr/local/bin:/usr/bin:/bin",
+          "/home/administrador/.nvm/versions/node/v24.22.1/bin/npx",
+          "-y",
+          "rea-agents@6.7.0",
+          "mcp",
+        ],
         "disabled": false,
       },
     },

@@ -1,7 +1,11 @@
 {
+  // Configuração do servidor Ubuntu: todos os MCPs abaixo executam no servidor.
+  // Para ligar/desligar, edite mcps-ubuntu.json e execute node scripts/apply-mcps.mjs.
+  // O script gera opencode.jsonc e substitui os valores de disabled abaixo.
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
     "servers": {
+      // Review de pull requests do Bitbucket.
       "bitbucket-review": {
         "type": "local",
         "command": [
@@ -11,26 +15,30 @@
         ],
         "disabled": false,
       },
+      // Pentest com policy e Docker locais do servidor.
       "pentest": {
         "type": "local",
         "command": [
           "/home/administrador/.nvm/versions/node/v24.22.1/bin/node",
-          "/home/administrador/xxx/mcp-suite/apps/pentest-mcp/dist/index.js"
+          "/home/administrador/xxx/mcp-suite/apps/pentest-mcp/dist/index.js",
         ],
         "environment": {
           "PENTEST_POLICY_FILE": "/home/administrador/.config/pentest-mcp/policy.json",
           "PENTEST_DOCKER_SOCKET": "/var/run/docker.sock",
-          "TMPDIR": "/tmp/opencode"
-        }
+          "TMPDIR": "/tmp/opencode",
+        },
+        "disabled": false,
       },
+      // Engenharia reversa.
       "rea": {
         "type": "local",
         "command": [
           "npx",
           "-y",
           "rea-agents@6.7.0",
-          "mcp"
-        ]
+          "mcp",
+        ],
+        "disabled": false,
       },
     },
   },
