@@ -11,22 +11,6 @@
         ],
         "disabled": false,
       },
-      "bitbucket-review-emfforserver": {
-        "type": "local",
-        "command": [
-          "ssh",
-          "emfforserver-local",
-          "/home/administrador/.nvm/versions/node/v20.18.2/bin/node",
-          "--env-file=/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/.env",
-          "/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/dist/index.js",
-        ],
-        "disabled": true,
-      },
-      "rea": {
-        "type": "local",
-        "command": ["npx", "-y", "rea-agents@6.7.0", "mcp"],
-        "disabled": false,
-      },
       "pentest": {
         "type": "local",
         "command": [
@@ -38,6 +22,15 @@
           "PENTEST_DOCKER_SOCKET": "/var/run/docker.sock",
           "TMPDIR": "/tmp/opencode"
         }
+      },
+      "rea": {
+        "type": "local",
+        "command": [
+          "npx",
+          "-y",
+          "rea-agents@6.7.0",
+          "mcp"
+        ]
       },
     },
   },
