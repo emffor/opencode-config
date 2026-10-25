@@ -1,6 +1,6 @@
 {
   // Configuração do servidor Ubuntu: todos os MCPs abaixo executam no servidor.
-  // Para ligar/desligar, edite mcps-ubuntu.json e execute node scripts/apply-mcps.mjs.
+  // Para ligar/desligar, edite mcps-ubuntu.jsonc e execute node apply-mcps.mjs.
   // O script gera opencode.jsonc e substitui os valores de disabled abaixo.
   "$schema": "https://opencode.ai/config.json",
   "mcp": {

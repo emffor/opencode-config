@@ -2,8 +2,8 @@
 
 ## Onde configurar
 
-- **Ligar/desligar MCPs no Mac:** edite `configs/mcps-macos.json`.
-- **Ligar/desligar MCPs no Ubuntu:** edite `configs/mcps-ubuntu.json`.
+- **Ligar/desligar MCPs no Mac:** edite `configs/mcps-macos.jsonc`.
+- **Ligar/desligar MCPs no Ubuntu:** edite `configs/mcps-ubuntu.jsonc`.
 - **Comandos e caminhos:** ficam nos perfis `configs/macos.jsonc` e
   `configs/ubuntu.jsonc`.
 - **`opencode.jsonc`:** arquivo gerado pelo script. Não edite manualmente.
@@ -20,7 +20,7 @@ No arquivo de controles, `true` habilita e `false` desabilita. Por exemplo:
 }
 ```
 
-Depois de salvar, execute `node scripts/apply-mcps.mjs` neste repositório.
+Depois de salvar, execute `node apply-mcps.mjs` neste repositório.
 O script detecta Mac/Ubuntu automaticamente e aplica as escolhas; salvar o JSON
 sozinho não aplica a mudança. É necessário Node.js 20 ou superior, sem instalar pacotes.
 Ao adicionar um MCP ao perfil, adicione também seu controle booleano.
@@ -61,14 +61,14 @@ No Mac:
 
 ```bash
 cd ~/.config/opencode
-node scripts/apply-mcps.mjs macos
+node apply-mcps.mjs macos
 ```
 
 No Ubuntu:
 
 ```bash
 cd ~/.config/opencode
-node scripts/apply-mcps.mjs ubuntu
+node apply-mcps.mjs ubuntu
 ```
 
 O script substitui o arquivo ativo (ou o link simbólico antigo) sem alterar o
@@ -79,7 +79,7 @@ Depois de receber alterações nos perfis ou controles pelo Git, execute novamen
 o script para atualizar a configuração ativa. Os controles são versionados;
 credenciais continuam fora do repositório.
 
-Para testar o script: `node --test scripts/apply-mcps.test.mjs`.
+Para testar o script: `node --test apply-mcps.test.mjs`.
 
 ## Primeiro pull no Mac após esta organização
 

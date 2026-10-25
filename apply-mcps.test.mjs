@@ -16,7 +16,7 @@ async function fixture(t, switches) {
   t.after(() => rm(root, { recursive: true, force: true }));
   await mkdir(join(root, 'configs'));
   await writeFile(join(root, 'configs/macos.jsonc'), '{"model":"example/model","mcp":{"servers":{"rea":{"command":["npx","rea"],"disabled":false}}}}');
-  await writeFile(join(root, 'configs/mcps-macos.json'), JSON.stringify(switches));
+  await writeFile(join(root, 'configs/mcps-macos.jsonc'), JSON.stringify(switches));
   return root;
 }
 
@@ -31,10 +31,18 @@ test('aplica true e false, preserva perfil e substitui link sem alterá-lo', asy
   assert.equal(active.model, 'example/model');
   assert.deepEqual(active.mcp.servers.rea.command, ['npx', 'rea']);
   assert.equal(await readFile(join(root, 'configs/macos.jsonc'), 'utf8'), profile);
-  await writeFile(join(root, 'configs/mcps-macos.json'), '{"rea":true}');
+  await writeFile(join(root, 'configs/mcps-macos.jsonc'), '{"rea":true}');
   await applyMcps(root, 'macos');
   active = parseJsonc(await readFile(join(root, 'opencode.jsonc'), 'utf8'));
   assert.equal(active.mcp.servers.rea.disabled, false);
+});
+
+test('aceita observações em comentários no arquivo de controles', async (t) => {
+  const root = await fixture(t, { rea: false });
+  await writeFile(join(root, 'configs/mcps-macos.jsonc'), '// Depois de salvar: node apply-mcps.mjs macos\n{"rea":false}');
+  await applyMcps(root, 'macos');
+  const active = parseJsonc(await readFile(join(root, 'opencode.jsonc'), 'utf8'));
+  assert.equal(active.mcp.servers.rea.disabled, true);
 });
 
 test('rejeita controles incorretos sem alterar configuração ativa', async (t) => {
@@ -42,7 +50,7 @@ test('rejeita controles incorretos sem alterar configuração ativa', async (t) 
   const output = join(root, 'opencode.jsonc');
   await writeFile(output, 'configuração anterior');
   for (const switches of [{}, { rea: 'false' }, { rea: true, desconhecido: false }]) {
-    await writeFile(join(root, 'configs/mcps-macos.json'), JSON.stringify(switches));
+    await writeFile(join(root, 'configs/mcps-macos.jsonc'), JSON.stringify(switches));
     await assert.rejects(applyMcps(root, 'macos'));
     assert.equal(await readFile(output, 'utf8'), 'configuração anterior');
   }

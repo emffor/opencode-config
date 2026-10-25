@@ -1,6 +1,6 @@
 {
   // Comandos e caminhos dos MCPs do Mac.
-  // Para ligar/desligar, edite mcps-macos.json e execute node scripts/apply-mcps.mjs.
+  // Para ligar/desligar, edite mcps-macos.jsonc e execute node apply-mcps.mjs.
   // O script gera opencode.jsonc e substitui os valores de disabled abaixo.
   "$schema": "https://opencode.ai/config.json",
   "mcp": {

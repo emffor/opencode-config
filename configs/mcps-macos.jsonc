@@ -1,0 +1,11 @@
+// true habilita; false desabilita. Só salvar este arquivo não aplica a mudança.
+// Depois de salvar, execute no terminal:
+// cd ~/.config/opencode
+// node apply-mcps.mjs macos
+{
+  "bitbucket-review": true,
+  "bitbucket-review-emfforserver": false,
+  "pentest-mcp-emfforserver": true,
+  "rea": false,
+  "rea-emfforserver": true
+}

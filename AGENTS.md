@@ -17,7 +17,7 @@
 - Esta seção se aplica somente a alterações no repositório `emffor/opencode-config`, não aos demais projetos que usam estas instruções globais.
 - O mesmo repositório é usado no servidor Ubuntu `emfforserver`, em `/home/administrador/.config/opencode`, e no macOS, em `/Users/emffor/.config/opencode`.
 - Preservar a compatibilidade dos dois ambientes ao alterar arquivos compartilhados; manter caminhos, comandos e MCPs específicos em `configs/ubuntu.jsonc` ou `configs/macos.jsonc`.
-- `opencode.jsonc` é gerado localmente por `node scripts/apply-mcps.mjs`, ignorado pelo Git. Comandos e caminhos ficam em `configs/macos.jsonc` ou `configs/ubuntu.jsonc`; habilitação usa booleanos em `configs/mcps-macos.json` ou `configs/mcps-ubuntu.json` (`true` habilita). Executar o script para aplicar mudanças, inclusive após atualizar os perfis pelo Git. Seguir o `README.md` e preservar ajustes exclusivos do arquivo ativo antes de substituí-lo.
+- `opencode.jsonc` é gerado localmente por `node apply-mcps.mjs`, ignorado pelo Git. Comandos e caminhos ficam em `configs/macos.jsonc` ou `configs/ubuntu.jsonc`; habilitação usa booleanos em `configs/mcps-macos.jsonc` ou `configs/mcps-ubuntu.jsonc` (`true` habilita). Executar o script para aplicar mudanças, inclusive após atualizar os perfis pelo Git. Seguir o `README.md` e preservar ajustes exclusivos do arquivo ativo antes de substituí-lo.
 - Manter `service.json`, credenciais, dependências geradas e backups fora do versionamento. Não copiar configurações privadas entre as máquinas.
 
 ## Comunicação
