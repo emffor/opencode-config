@@ -12,6 +12,14 @@
   6. Padrões da ferramenta
 - Não substituir regras específicas do projeto por preferências genéricas deste arquivo.
 
+## Repositório De Configuração Do OpenCode
+
+- Esta seção se aplica somente a alterações no repositório `emffor/opencode-config`, não aos demais projetos que usam estas instruções globais.
+- O mesmo repositório é usado no servidor Ubuntu `emfforserver`, em `/home/administrador/.config/opencode`, e no macOS, em `/Users/emffor/.config/opencode`.
+- Preservar a compatibilidade dos dois ambientes ao alterar arquivos compartilhados; manter caminhos, comandos e MCPs específicos em `configs/ubuntu.jsonc` ou `configs/macos.jsonc`.
+- `opencode.jsonc` é a cópia ativa local do perfil escolhido, ignorada pelo Git; `git pull` não seleciona nem aplica perfis automaticamente. Seguir o `README.md` para aplicá-los e preservar ajustes locais antes da cópia.
+- Manter `service.json`, credenciais, dependências geradas e backups fora do versionamento. Não copiar configurações privadas entre as máquinas.
+
 ## Comunicação
 
 - Responder sempre em pt-BR, de forma direta, objetiva e sem floreio.

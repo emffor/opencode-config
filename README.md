@@ -1,5 +1,17 @@
 # Configuração compartilhada do OpenCode
 
+Este repositório (`emffor/opencode-config`) é usado pelo OpenCode tanto no
+servidor Ubuntu quanto no Mac:
+
+| Ambiente | Diretório do repositório e da configuração | Perfil versionado |
+| --- | --- | --- |
+| Ubuntu — servidor `emfforserver`, usuário `administrador` | `/home/administrador/.config/opencode` | `configs/ubuntu.jsonc` |
+| macOS — usuário `emffor` | `/Users/emffor/.config/opencode` | `configs/macos.jsonc` |
+
+As alterações neste repositório devem preservar a compatibilidade dos dois
+ambientes. Caminhos, comandos e MCPs específicos de um sistema devem ficar no
+perfil correspondente, não na configuração compartilhada.
+
 Agents, commands, skills, plugins e preferências comuns são compartilhados pelo Git.
 Os MCPs e caminhos específicos de cada sistema ficam em perfis versionados:
 
@@ -8,6 +20,8 @@ Os MCPs e caminhos específicos de cada sistema ficam em perfis versionados:
 
 O OpenCode lê `~/.config/opencode/opencode.jsonc`. Esse arquivo é local e ignorado
 pelo Git; os perfis não são selecionados automaticamente pelo sistema operacional.
+O `service.json` também é local e não versionado: cada máquina mantém sua própria
+configuração privada do serviço, sem sincronizá-la pelo Git.
 
 ## Selecionar ou atualizar o perfil ativo
 
