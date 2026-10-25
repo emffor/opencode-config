@@ -1,0 +1,32 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "servers": {
+      "bitbucket-review": {
+        "type": "local",
+        "command": [
+          "node",
+          "--env-file=/Users/emffor/xxx/mcp-suite/apps/bitbucket-mcp/.env",
+          "/Users/emffor/xxx/mcp-suite/apps/bitbucket-mcp/dist/index.js",
+        ],
+        "disabled": false,
+      },
+      "bitbucket-review-emfforserver": {
+        "type": "local",
+        "command": [
+          "ssh",
+          "emfforserver-local",
+          "/home/administrador/.nvm/versions/node/v20.18.2/bin/node",
+          "--env-file=/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/.env",
+          "/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/dist/index.js",
+        ],
+        "disabled": true,
+      },
+      "rea": {
+        "type": "local",
+        "command": ["npx", "-y", "rea-agents@6.7.0", "mcp"],
+        "disabled": false,
+      },
+    },
+  },
+}
