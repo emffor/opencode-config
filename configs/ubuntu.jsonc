@@ -15,18 +15,15 @@
         ],
         "disabled": false,
       },
-      // Pentest com policy e Docker locais do servidor.
+      // Mesmo coordenador HTTP do Hub; a ponte lê o token privado no Ubuntu.
       "pentest": {
         "type": "local",
         "command": [
           "/home/administrador/.nvm/versions/node/v24.22.1/bin/node",
-          "/home/administrador/xxx/mcp-suite/apps/pentest-mcp/dist/index.js",
+          "/home/administrador/.config/opencode/pentest-http-bridge.mjs",
+          "http://172.26.0.10:7320/mcp",
+          "/home/administrador/.config/pentest-mcp/http-token",
         ],
-        "environment": {
-          "PENTEST_POLICY_FILE": "/home/administrador/.config/pentest-mcp/policy.json",
-          "PENTEST_DOCKER_SOCKET": "/var/run/docker.sock",
-          "TMPDIR": "/tmp/opencode",
-        },
         "disabled": false,
       },
       // Engenharia reversa.

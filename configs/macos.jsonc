@@ -28,20 +28,17 @@
         ],
         "disabled": true,
       },
-      // Pentest executado no servidor via SSH, usando o Docker do servidor.
+      // Ponte SSH para o mesmo coordenador HTTP do Hub. Token permanece no Ubuntu.
       "pentest-mcp-emfforserver": {
         "type": "local",
         "command": [
           "ssh",
           "-T",
           "emfforserver-local",
-          "/usr/bin/env",
-          "PENTEST_POLICY_FILE=/home/administrador/.config/pentest-mcp/policy.json",
-          "PENTEST_DOCKER_SOCKET=/var/run/docker.sock",
-          "TMPDIR=/tmp/opencode",
-          "PATH=/home/administrador/.nvm/versions/node/v24.22.1/bin:/usr/local/bin:/usr/bin:/bin",
           "/home/administrador/.nvm/versions/node/v24.22.1/bin/node",
-          "/home/administrador/xxx/mcp-suite/apps/pentest-mcp/dist/index.js",
+          "/home/administrador/.config/opencode/pentest-http-bridge.mjs",
+          "http://172.26.0.10:7320/mcp",
+          "/home/administrador/.config/pentest-mcp/http-token",
         ],
         "disabled": false,
       },

@@ -26,8 +26,61 @@ sozinho não aplica a mudança. É necessário Node.js 20 ou superior, sem insta
 Ao adicionar um MCP ao perfil, adicione também seu controle booleano.
 Credenciais devem continuar nos arquivos `.env` externos, nunca nos perfis.
 
-No Mac, os MCPs com sufixo `emfforserver` executam no servidor via SSH; os demais
+No Mac, os MCPs com sufixo `emfforserver` usam o servidor via SSH; os demais
 executam no próprio Mac. No perfil Ubuntu, todos executam no servidor.
+
+## Pentest compartilhado com o MCP Hub
+
+`pentest` (Ubuntu) e `pentest-mcp-emfforserver` (Mac) usam o **mesmo coordenador HTTP
+do Hub**, em `http://172.26.0.10:7320/mcp`. Não iniciam outro processo Pentest nem
+carregam `policy.json` de laboratório. Isso compartilha preferências persistentes,
+concessões e o perfil VPN `proton-free` que já estão cadastrados no coordenador.
+O nome do perfil é `proton-free`, não `pronto-free`; não é criada outra VPN.
+
+O script `pentest-http-bridge.mjs` encaminha o protocolo stdio ao HTTP existente,
+preservando a identidade do servidor, sessão e metadados. No Mac, a ponte roda
+**no Ubuntu pelo SSH `emfforserver-local`**; não requer Docker ou token no Mac.
+O token privado é lido apenas no Ubuntu em
+`/home/administrador/.config/pentest-mcp/http-token`, sem copiá-lo para este
+repositório, argumentos ou outra máquina. Os perfis versionados contêm somente o
+caminho. O arquivo precisa ser regular, privado (0600), sem symlink e pertencer
+ao usuário do processo ou root. Não alterar credenciais existentes para aplicar.
+
+Pré-requisitos: Node 24.22.1 no caminho dos perfis, coordenador provisionado e
+acessível pelo Ubuntu e, no Mac, alias/chave SSH existentes. Não abre portas,
+reinicia serviços, cria autorização nem executa scan. Sem reconexão/retry de calls
+ou fallback para outra instância/Direct. Fechar a ponte encerra só a sessão HTTP,
+não cancela análises do manager compartilhado. Concorrência/capacidade também são
+compartilhadas com o Hub, e suas permissões da web não participam do acesso MCP
+direto: a credencial HTTP dá acesso às tools sujeitas à política do coordenador.
+
+Após atualizar este repositório no Mac, execute `node apply-mcps.mjs macos`.
+No Ubuntu, execute `node apply-mcps.mjs ubuntu`. O OpenCode recarrega a configuração;
+se a sessão conservar a conexão antiga, use `/reload` e confira `/mcps`. Não é
+necessário reiniciar o serviço OpenCode para aplicar o perfil.
+Consulte `pentest_get_settings` e `pentest_get_capabilities`: devem anunciar
+`proton-free` e as mesmas preferências do Hub. `pentest_check_network` verifica
+saúde/identidade/guards, não mede IP público nem garante conectividade futura.
+Perfil cadastrado não significa túnel saudável; gateway indisponível bloqueia os
+testes igualmente nos dois clientes, sem fallback.
+
+Validação local: `node --test apply-mcps.test.mjs pentest-http-bridge.test.mjs`.
+Testes cobrem HTTP loopback, autenticação, sessão/metadados, limites, falhas sem
+retry/vazamento e equivalência dos dois perfis. Não validam acesso SSH real pelo Mac.
+
+Em 30/10/2026, a ponte foi aplicada no Ubuntu após conferir que a configuração ativa
+não tinha diferenças exclusivas fora do Pentest; backup privado preservado fora do
+Git. Consulta real pela própria tool do OpenCode confirmou a revisão 80, preferência
+VPN e perfil `proton-free` do coordenador compartilhado. Leituras HTTP confirmaram
+concessão válida para a página de teste. Nenhum cadastro ou preferência foi alterado.
+`pentest_check_network` retornou `unavailable`: o container pinado existe e sua imagem
+corresponde, mas o health está `unhealthy`. Isso é um problema operacional do gateway,
+não ausência do perfil. Nenhum túnel/container/serviço foi reiniciado nem scan iniciado.
+O perfil Mac foi preparado e testado estruturalmente; aplicação/SSH real no Mac pendentes.
+
+Ativação/reversão: preservar ajustes exclusivos da configuração ativa antes de
+aplicar; para reverter, restaurar o perfil versionado anterior e executar novamente
+o script. Não substituir políticas/settings/token do Pentest nem reiniciar o gateway.
 
 ## Estrutura por ambiente
 
