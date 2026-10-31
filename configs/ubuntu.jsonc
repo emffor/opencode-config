@@ -9,6 +9,7 @@
       "bitbucket-review": {
         "type": "local",
         "command": [
+          "/home/administrador/.config/opencode/node-with-nvm.sh",
           "node",
           "--env-file=/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/.env",
           "/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/dist/index.js",
@@ -19,7 +20,8 @@
       "pentest": {
         "type": "local",
         "command": [
-          "/home/administrador/.nvm/versions/node/v26.13.0/bin/node",
+          "/home/administrador/.config/opencode/node-with-nvm.sh",
+          "node",
           "/home/administrador/.config/opencode/pentest-http-bridge.mjs",
           "http://172.26.0.10:7320/mcp",
           "/home/administrador/.config/pentest-mcp/http-token",
@@ -30,6 +32,7 @@
       "rea": {
         "type": "local",
         "command": [
+          "/home/administrador/.config/opencode/node-with-nvm.sh",
           "npx",
           "-y",
           "rea-agents@6.7.0",

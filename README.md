@@ -23,6 +23,11 @@ No arquivo de controles, `true` habilita e `false` desabilita. Por exemplo:
 Depois de salvar, execute `node apply-mcps.mjs` neste repositório.
 O script detecta Mac/Ubuntu automaticamente e aplica as escolhas; salvar o JSON
 sozinho não aplica a mudança. É necessário Node.js 20 ou superior, sem instalar pacotes.
+Os MCPs Ubuntu e os MCPs remotos do Mac usam `node-with-nvm.sh`, que carrega o
+`nvm` e executa a versão `default` do servidor. Os MCPs locais do Mac usam
+`fnm exec --using=default`. Após atualizar o Node, selecione a versão desejada
+como padrão no gerenciador do respectivo ambiente; não é necessário editar os
+perfis por causa da versão.
 Ao adicionar um MCP ao perfil, adicione também seu controle booleano.
 Credenciais devem continuar nos arquivos `.env` externos, nunca nos perfis.
 
@@ -46,8 +51,9 @@ repositório, argumentos ou outra máquina. Os perfis versionados contêm soment
 caminho. O arquivo precisa ser regular, privado (0600), sem symlink e pertencer
 ao usuário do processo ou root. Não alterar credenciais existentes para aplicar.
 
-Pré-requisitos: Node 26.13.0 no caminho dos perfis, coordenador provisionado e
-acessível pelo Ubuntu e, no Mac, alias/chave SSH existentes. Não abre portas,
+Pré-requisitos: uma versão Node `default` configurada pelo `nvm` no Ubuntu,
+coordenador provisionado e acessível pelo Ubuntu e, no Mac, alias/chave SSH
+existentes. Não abre portas,
 reinicia serviços, cria autorização nem executa scan. Sem reconexão/retry de calls
 ou fallback para outra instância/Direct. Fechar a ponte encerra só a sessão HTTP,
 não cancela análises do manager compartilhado. Concorrência/capacidade também são
