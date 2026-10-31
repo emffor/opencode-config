@@ -19,7 +19,7 @@
       "pentest": {
         "type": "local",
         "command": [
-          "/home/administrador/.nvm/versions/node/v24.22.1/bin/node",
+          "/home/administrador/.nvm/versions/node/v26.13.0/bin/node",
           "/home/administrador/.config/opencode/pentest-http-bridge.mjs",
           "http://172.26.0.10:7320/mcp",
           "/home/administrador/.config/pentest-mcp/http-token",

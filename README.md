@@ -46,7 +46,7 @@ repositório, argumentos ou outra máquina. Os perfis versionados contêm soment
 caminho. O arquivo precisa ser regular, privado (0600), sem symlink e pertencer
 ao usuário do processo ou root. Não alterar credenciais existentes para aplicar.
 
-Pré-requisitos: Node 24.22.1 no caminho dos perfis, coordenador provisionado e
+Pré-requisitos: Node 26.13.0 no caminho dos perfis, coordenador provisionado e
 acessível pelo Ubuntu e, no Mac, alias/chave SSH existentes. Não abre portas,
 reinicia serviços, cria autorização nem executa scan. Sem reconexão/retry de calls
 ou fallback para outra instância/Direct. Fechar a ponte encerra só a sessão HTTP,
