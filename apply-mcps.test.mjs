@@ -11,6 +11,18 @@ test('JSONC preserva strings, URLs e vírgulas dentro de strings', () => {
   });
 });
 
+test('Bitbucket Ubuntu e Mac usam o mesmo launcher VPN e configuração privada só no Ubuntu', async () => {
+  const ubuntu = parseJsonc(await readFile(new URL('./configs/ubuntu.jsonc', import.meta.url), 'utf8'));
+  const macos = parseJsonc(await readFile(new URL('./configs/macos.jsonc', import.meta.url), 'utf8'));
+  const launcher = '/home/administrador/xxx/mcp-suite/packages/network-gateway/dist/launcher.js';
+  const privateConfig = '/home/administrador/.config/mcp-suite/launchers/bitbucket.json';
+  for (const entry of [ubuntu.mcp.servers['bitbucket-review'], macos.mcp.servers['bitbucket-review'], macos.mcp.servers['bitbucket-review-emfforserver']]) {
+    assert.deepEqual(entry.command.slice(-2), [launcher, privateConfig]);
+    assert.ok(!entry.command.some(value => value.includes('--env-file') || value.endsWith('/bitbucket-mcp/dist/index.js')));
+  }
+  assert.deepEqual(macos.mcp.servers['bitbucket-review'].command.slice(0, 3), ['ssh', '-T', 'emfforserver-local']);
+});
+
 async function fixture(t, switches) {
   const root = await mkdtemp(join(tmpdir(), 'opencode-mcps-'));
   t.after(() => rm(root, { recursive: true, force: true }));
@@ -19,6 +31,23 @@ async function fixture(t, switches) {
   await writeFile(join(root, 'configs/mcps-macos.jsonc'), JSON.stringify(switches));
   return root;
 }
+
+test('Antigravity usa o mesmo adaptador nos dois perfis e é preservado na geração', async (t) => {
+  const root = await mkdtemp(join(tmpdir(), 'opencode-antigravity-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(join(root, 'configs'));
+  for (const platform of ['macos', 'ubuntu']) {
+    for (const filename of [`${platform}.jsonc`, `mcps-${platform}.jsonc`]) {
+      await writeFile(join(root, 'configs', filename), await readFile(new URL(`./configs/${filename}`, import.meta.url), 'utf8'));
+    }
+    const profile = parseJsonc(await readFile(join(root, 'configs', `${platform}.jsonc`), 'utf8'));
+    assert.deepEqual(profile.plugins, ['./integrations/antigravity']);
+    await applyMcps(root, platform);
+    const active = parseJsonc(await readFile(join(root, 'opencode.jsonc'), 'utf8'));
+    assert.deepEqual(active.plugins, profile.plugins);
+    assert.equal(active.model, profile.model);
+  }
+});
 
 test('aplica true e false, preserva perfil e substitui link sem alterá-lo', async (t) => {
   const root = await fixture(t, { rea: false });

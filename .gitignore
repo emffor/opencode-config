@@ -6,3 +6,12 @@ bun.lock
 /opencode.jsonc
 /service.json
 /opencode.jsonc*.backup
+/antigravity-accounts.json*
+/antigravity-logs/
+!/integrations/antigravity/package.json
+!/integrations/antigravity/package-lock.json
+.gitignore
+antigravity-accounts.json
+antigravity-accounts.json.*.tmp
+antigravity-signature-cache.json
+antigravity-logs/

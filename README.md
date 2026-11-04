@@ -31,8 +31,66 @@ perfis por causa da versão.
 Ao adicionar um MCP ao perfil, adicione também seu controle booleano.
 Credenciais devem continuar nos arquivos `.env` externos, nunca nos perfis.
 
-No Mac, os MCPs com sufixo `emfforserver` usam o servidor via SSH; os demais
-executam no próprio Mac. No perfil Ubuntu, todos executam no servidor.
+No Mac, os MCPs com sufixo `emfforserver` usam o servidor via SSH. Bitbucket também
+usa o Ubuntu por SSH, mantendo seu nome habitual. No perfil Ubuntu, todos executam
+no servidor.
+
+## Antigravity no OpenCode
+
+Os dois perfis carregam o adaptador local `./integrations/antigravity`, que usa
+`opencode-antigravity-auth@2.1.2`. Requer OpenCode
+2.1.2+ e Node.js 20+. É um plugin não oficial: o Google pode restringir ou
+suspender contas que usam clientes de terceiros.
+
+Após receber a configuração pelo Git, execute **em cada máquina**:
+
+```bash
+cd ~/.config/opencode
+npm ci --prefix integrations/antigravity --ignore-scripts
+node apply-mcps.mjs
+opencode auth login google
+```
+
+Escolha **Google OAuth (Antigravity)** e conclua a autorização no navegador.
+No Ubuntu por SSH, siga as instruções de autorização exibidas pelo login.
+Não copie tokens ou arquivos de contas entre o Mac e o Ubuntu.
+
+No OpenCode, use `/antigravity` (ou `/ag`) para consultar contas e cotas.
+Selecione um modelo `antigravity-*` disponível para sua conta; a lista é
+descoberta pelo plugin e depende do plano Google. O modelo padrão não é alterado.
+
+Somente a configuração do plugin é compartilhada. `antigravity-accounts.json`
+(incluindo arquivos auxiliares) e `antigravity-logs/` são locais e ignorados
+pelo Git. Nunca versione esses arquivos: podem conter credenciais ou dados privados.
+Para desativar a integração, remova a entrada do plugin do perfil correspondente
+e execute novamente `node apply-mcps.mjs`; não é necessário remover as contas.
+
+### Correção do menu de contas no OpenCode 2.2.5
+
+O plugin 2.1.2 inclui campos opcionais com valor `undefined` ao listar contas
+(por exemplo, `quota` quando ainda não há cache). O servidor rejeita essa resposta
+com `Expected JSON value`, exibindo `Server failed to encode its response` em
+`/antigravity`. O adaptador remove esses campos apenas do retorno do método
+`antigravity.accounts/list`, antes da serialização. Não modifica contas, tokens,
+cotas ou outros métodos; mantém o ID e a TUI originais do plugin.
+
+O adaptador e seu lockfile são versionados; `node_modules` continua local.
+Execute o `npm ci` acima também no Mac após receber as alterações. Não carregue
+simultaneamente o pacote npm original e o adaptador. A configuração é recarregada
+automaticamente; use `/reload` se a sessão ainda mantiver o menu anterior.
+Para validar sem acessar o Google: `node --test antigravity-rpc.test.mjs`.
+
+## VPN padrão do Bitbucket
+
+O perfil usa `packages/network-gateway/dist/launcher.js` no Ubuntu e configuração
+privada `~/.config/mcp-suite/launchers/bitbucket.json`. Imagem, credenciais e perfil
+VPN ficam no servidor. Cada tool anuncia `useVpn` com default true. Somente para
+pedido explícito sem VPN, enviar `useVpn:false`; não há fallback nem retry.
+O catálogo é descoberto sem rede e não comprova disponibilidade do túnel.
+No Mac, atualizar este repositório e executar `node apply-mcps.mjs macos`; aplicação
+e teste real no Mac ainda pendentes. Ubuntu aplicado, handshake/catalog confirmado.
+Não usar `dist/index.js` diretamente como caminho padrão: essa entrada é legada
+e não aplica o launcher VPN. Ver detalhes em `mcp-suite/docs/implementacoes/shared-vpn-launcher.md`.
 
 ## Pentest compartilhado com o MCP Hub
 

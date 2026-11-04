@@ -1,0 +1,13 @@
+{
+  "name": "opencode-config-antigravity",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.mjs",
+    "./tui": "./tui.mjs"
+  },
+  "dependencies": {
+    "opencode-antigravity-auth": "2.1.2"
+  }
+}

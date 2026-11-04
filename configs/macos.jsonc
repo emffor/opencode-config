@@ -3,18 +3,20 @@
   // Para ligar/desligar, edite mcps-macos.jsonc e execute node apply-mcps.mjs.
   // O script gera opencode.jsonc e substitui os valores de disabled abaixo.
   "$schema": "https://opencode.ai/config.json",
+  "plugins": ["./integrations/antigravity"],
   "mcp": {
     "servers": {
-      // Bitbucket executado no Mac.
+      // Bitbucket isolado no Ubuntu; VPN por padrão, sem credenciais no Mac.
       "bitbucket-review": {
         "type": "local",
         "command": [
-          "fnm",
-          "exec",
-          "--using=default",
+          "ssh",
+          "-T",
+          "emfforserver-local",
+          "/home/administrador/.config/opencode/node-with-nvm.sh",
           "node",
-          "--env-file=/Users/emffor/xxx/mcp-suite/apps/bitbucket-mcp/.env",
-          "/Users/emffor/xxx/mcp-suite/apps/bitbucket-mcp/dist/index.js",
+          "/home/administrador/xxx/mcp-suite/packages/network-gateway/dist/launcher.js",
+          "/home/administrador/.config/mcp-suite/launchers/bitbucket.json",
         ],
         "disabled": false,
       },
@@ -27,8 +29,8 @@
           "emfforserver-local",
           "/home/administrador/.config/opencode/node-with-nvm.sh",
           "node",
-          "--env-file=/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/.env",
-          "/home/administrador/xxx/mcp-suite/apps/bitbucket-mcp/dist/index.js",
+          "/home/administrador/xxx/mcp-suite/packages/network-gateway/dist/launcher.js",
+          "/home/administrador/.config/mcp-suite/launchers/bitbucket.json",
         ],
         "disabled": true,
       },
