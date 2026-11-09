@@ -23,14 +23,29 @@ test('Bitbucket Ubuntu e Mac usam o mesmo launcher VPN e configuração privada 
   assert.deepEqual(macos.mcp.servers['bitbucket-review'].command.slice(0, 3), ['ssh', '-T', 'emfforserver-local']);
 });
 
-test('REA Ubuntu executa instalação estável diretamente sem npx', async () => {
+test('REA Ubuntu e Mac executam instalação estável diretamente sem npx', async () => {
   const ubuntu = parseJsonc(await readFile(new URL('./configs/ubuntu.jsonc', import.meta.url), 'utf8'));
+  const macos = parseJsonc(await readFile(new URL('./configs/macos.jsonc', import.meta.url), 'utf8'));
+  const targetScript = '/home/administrador/.local/share/opencode/mcp/rea/node_modules/rea-agents/scripts/rea.mjs';
   assert.deepEqual(ubuntu.mcp.servers.rea.command, [
     '/home/administrador/.config/opencode/node-with-nvm.sh',
     'node',
-    '/home/administrador/.local/share/opencode/mcp/rea/node_modules/rea-agents/scripts/rea.mjs',
+    targetScript,
     'mcp',
   ]);
+  assert.deepEqual(macos.mcp.servers['rea-emfforserver'].command, [
+    'ssh',
+    '-T',
+    'emfforserver-local',
+    '/home/administrador/.config/opencode/node-with-nvm.sh',
+    'node',
+    targetScript,
+    'mcp',
+  ]);
+  assert.deepEqual(macos.mcp.servers['rea-emfforserver'].timeout, {
+    startup: 60000,
+    catalog: 60000,
+  });
 });
 
 async function fixture(t, switches) {
