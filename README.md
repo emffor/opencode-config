@@ -35,6 +35,26 @@ No Mac, os MCPs com sufixo `emfforserver` usam o servidor via SSH. Bitbucket tam
 usa o Ubuntu por SSH, mantendo seu nome habitual. No perfil Ubuntu, todos executam
 no servidor.
 
+## REA local no Ubuntu
+
+O perfil Ubuntu executa `rea-agents@6.7.0` diretamente pelo Node, sem `npx`
+na inicialização. Isso evita que consultas ao npm registry ou falhas de DNS
+consumam o timeout de conexão MCP. O perfil Mac permanece inalterado.
+
+Para provisionar a instalação local no Ubuntu:
+
+```bash
+~/.config/opencode/node-with-nvm.sh npm install \
+  --prefix ~/.local/share/opencode/mcp/rea \
+  --ignore-scripts --save-exact --no-audit --no-fund rea-agents@6.7.0
+cd ~/.config/opencode
+node apply-mcps.mjs ubuntu
+```
+
+A instalação e seu lockfile ficam fora deste repositório e do cache descartável
+do `npx`. Não é necessário reinstalar a cada sessão. A configuração é recarregada
+automaticamente; use `/reload` se `/mcps` ainda exibir o estado anterior.
+
 ## Antigravity no OpenCode
 
 Os dois perfis carregam o adaptador local `./integrations/antigravity`, que usa

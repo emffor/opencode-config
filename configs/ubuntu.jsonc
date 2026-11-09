@@ -29,14 +29,13 @@
         ],
         "disabled": false,
       },
-      // Engenharia reversa.
+      // Engenharia reversa: instalação local fixa, sem consulta npm na inicialização.
       "rea": {
         "type": "local",
         "command": [
           "/home/administrador/.config/opencode/node-with-nvm.sh",
-          "npx",
-          "-y",
-          "rea-agents@6.7.0",
+          "node",
+          "/home/administrador/.local/share/opencode/mcp/rea/node_modules/rea-agents/scripts/rea.mjs",
           "mcp",
         ],
         "disabled": false,

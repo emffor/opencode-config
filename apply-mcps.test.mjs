@@ -23,6 +23,16 @@ test('Bitbucket Ubuntu e Mac usam o mesmo launcher VPN e configuração privada 
   assert.deepEqual(macos.mcp.servers['bitbucket-review'].command.slice(0, 3), ['ssh', '-T', 'emfforserver-local']);
 });
 
+test('REA Ubuntu executa instalação estável diretamente sem npx', async () => {
+  const ubuntu = parseJsonc(await readFile(new URL('./configs/ubuntu.jsonc', import.meta.url), 'utf8'));
+  assert.deepEqual(ubuntu.mcp.servers.rea.command, [
+    '/home/administrador/.config/opencode/node-with-nvm.sh',
+    'node',
+    '/home/administrador/.local/share/opencode/mcp/rea/node_modules/rea-agents/scripts/rea.mjs',
+    'mcp',
+  ]);
+});
+
 async function fixture(t, switches) {
   const root = await mkdtemp(join(tmpdir(), 'opencode-mcps-'));
   t.after(() => rm(root, { recursive: true, force: true }));
