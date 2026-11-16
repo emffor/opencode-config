@@ -55,34 +55,6 @@ A instalação e seu lockfile ficam fora deste repositório e do cache descartá
 do `npx`. Não é necessário reinstalar a cada sessão. A configuração é recarregada
 automaticamente; use `/reload` se `/mcps` ainda exibir o estado anterior.
 
-## Antigravity no OpenCode
-
-Os dois perfis carregam diretamente o plugin `@cortexkit/opencode-antigravity-auth@3.1.4`.
-Requer OpenCode 2.3.0+ e Node.js 20+. É um plugin não oficial: o Google pode restringir
-ou suspender contas que usam clientes de terceiros.
-
-Após receber a configuração pelo Git, execute **em cada máquina**:
-
-```bash
-cd ~/.config/opencode
-node apply-mcps.mjs
-opencode auth login google
-```
-
-Escolha **Google OAuth (Antigravity)** e conclua a autorização no navegador.
-No Ubuntu por SSH, siga as instruções de autorização exibidas pelo login.
-Não copie tokens ou arquivos de contas entre o Mac e o Ubuntu.
-
-No OpenCode, use `/antigravity` (ou `/ag`) para consultar contas e cotas.
-Selecione um modelo `antigravity-*` disponível para sua conta; a lista é
-descoberta pelo plugin e depende do plano Google. O modelo padrão não é alterado.
-
-Somente a configuração do plugin é compartilhada. `antigravity-accounts.json`
-(incluindo arquivos auxiliares) e `antigravity-logs/` são locais e ignorados
-pelo Git. Nunca versione esses arquivos: podem conter credenciais ou dados privados.
-Para desativar a integração, remova a entrada do plugin do perfil correspondente
-e execute novamente `node apply-mcps.mjs`; não é necessário remover as contas.
-
 ## VPN padrão do Bitbucket
 
 O perfil usa `packages/network-gateway/dist/launcher.js` no Ubuntu e configuração
