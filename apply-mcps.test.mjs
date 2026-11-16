@@ -57,7 +57,7 @@ async function fixture(t, switches) {
   return root;
 }
 
-test('Antigravity usa o mesmo adaptador nos dois perfis e é preservado na geração', async (t) => {
+test('Antigravity usa o plugin 3.1.4 nos dois perfis, preserva MCPs e é idempotente na geração', async (t) => {
   const root = await mkdtemp(join(tmpdir(), 'opencode-antigravity-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   await mkdir(join(root, 'configs'));
@@ -66,11 +66,16 @@ test('Antigravity usa o mesmo adaptador nos dois perfis e é preservado na gera�
       await writeFile(join(root, 'configs', filename), await readFile(new URL(`./configs/${filename}`, import.meta.url), 'utf8'));
     }
     const profile = parseJsonc(await readFile(join(root, 'configs', `${platform}.jsonc`), 'utf8'));
-    assert.deepEqual(profile.plugins, ['./integrations/antigravity']);
+    assert.deepEqual(profile.plugins, ['@cortexkit/opencode-antigravity-auth@3.1.4']);
     await applyMcps(root, platform);
-    const active = parseJsonc(await readFile(join(root, 'opencode.jsonc'), 'utf8'));
-    assert.deepEqual(active.plugins, profile.plugins);
+    const first = await readFile(join(root, 'opencode.jsonc'), 'utf8');
+    await applyMcps(root, platform);
+    const second = await readFile(join(root, 'opencode.jsonc'), 'utf8');
+    assert.equal(second, first);
+    const active = parseJsonc(second);
+    assert.deepEqual(active.plugins, ['@cortexkit/opencode-antigravity-auth@3.1.4']);
     assert.equal(active.model, profile.model);
+    assert.deepEqual(Object.keys(active.mcp.servers), Object.keys(profile.mcp.servers));
   }
 });
 
