@@ -1,0 +1,40 @@
+// Gerado por apply-mcps.mjs. Não edite manualmente.
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugins": [],
+  "mcp": {
+    "servers": {
+      "bitbucket-review": {
+        "type": "local",
+        "command": [
+          "/home/administrador/.config/opencode/node-with-nvm.sh",
+          "node",
+          "/home/administrador/xxx/mcp-suite/packages/network-gateway/dist/launcher.js",
+          "/home/administrador/.config/mcp-suite/launchers/bitbucket.json"
+        ],
+        "disabled": false
+      },
+      "pentest": {
+        "type": "local",
+        "command": [
+          "/home/administrador/.config/opencode/node-with-nvm.sh",
+          "node",
+          "/home/administrador/.config/opencode/pentest-http-bridge.mjs",
+          "http://172.26.0.10:7320/mcp",
+          "/home/administrador/.config/pentest-mcp/http-token"
+        ],
+        "disabled": false
+      },
+      "rea": {
+        "type": "local",
+        "command": [
+          "/home/administrador/.config/opencode/node-with-nvm.sh",
+          "node",
+          "/home/administrador/.local/share/opencode/mcp/rea/node_modules/rea-agents/scripts/rea.mjs",
+          "mcp"
+        ],
+        "disabled": false
+      }
+    }
+  }
+}
