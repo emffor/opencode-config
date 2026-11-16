@@ -1,7 +1,4 @@
-// true habilita; false desabilita. Só salvar este arquivo não aplica a mudança.
-// Depois de salvar, execute no terminal:
-// cd ~/.config/opencode
-// node apply-mcps.mjs macos
+// MCPs do macOS. Execução remota no Ubuntu via SSH.
 {
   "bitbucket-review": true,
   "bitbucket-review-emfforserver": false,

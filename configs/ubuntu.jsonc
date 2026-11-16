@@ -33,8 +33,9 @@
         "type": "local",
         "command": [
           "/home/administrador/.config/opencode/node-with-nvm.sh",
-          "node",
-          "/home/administrador/.local/share/opencode/mcp/rea/node_modules/rea-agents/scripts/rea.mjs",
+          "npx",
+          "-y",
+          "rea-agents@6.7.0",
           "mcp",
         ],
         "disabled": false,

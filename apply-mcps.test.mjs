@@ -23,14 +23,14 @@ test('Bitbucket Ubuntu e Mac usam o mesmo launcher VPN e configuração privada 
   assert.deepEqual(macos.mcp.servers['bitbucket-review'].command.slice(0, 3), ['ssh', '-T', 'emfforserver-local']);
 });
 
-test('REA Ubuntu e Mac executam instalação estável diretamente sem npx', async () => {
+test('REA Ubuntu e Mac usam npx com versão fixa', async () => {
   const ubuntu = parseJsonc(await readFile(new URL('./configs/ubuntu.jsonc', import.meta.url), 'utf8'));
   const macos = parseJsonc(await readFile(new URL('./configs/macos.jsonc', import.meta.url), 'utf8'));
-  const targetScript = '/home/administrador/.local/share/opencode/mcp/rea/node_modules/rea-agents/scripts/rea.mjs';
   assert.deepEqual(ubuntu.mcp.servers.rea.command, [
     '/home/administrador/.config/opencode/node-with-nvm.sh',
-    'node',
-    targetScript,
+    'npx',
+    '-y',
+    'rea-agents@6.7.0',
     'mcp',
   ]);
   assert.deepEqual(macos.mcp.servers['rea-emfforserver'].command, [
@@ -38,8 +38,9 @@ test('REA Ubuntu e Mac executam instalação estável diretamente sem npx', asyn
     '-T',
     'emfforserver-local',
     '/home/administrador/.config/opencode/node-with-nvm.sh',
-    'node',
-    targetScript,
+    'npx',
+    '-y',
+    'rea-agents@6.7.0',
     'mcp',
   ]);
   assert.deepEqual(macos.mcp.servers['rea-emfforserver'].timeout, {
