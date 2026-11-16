@@ -1,5 +1,47 @@
 # Configuração compartilhada do OpenCode
 
+## Reinstalação a partir do repositório
+
+Os perfis, instruções, agents, commands, skills, plugins e `cli.json` estão
+versionados. Para instalar após clonar, execute **no clone de cada máquina**:
+
+```bash
+cd ~/opencode-config
+node install.mjs
+```
+
+É necessário Node.js 20 ou superior. O instalador detecta macOS ou Linux
+(perfil Ubuntu), gera `opencode.jsonc` e cria links em
+`${XDG_CONFIG_HOME:-~/.config}/opencode`. Se o clone já for essa pasta, usa os
+arquivos diretamente. É possível selecionar explicitamente `node install.mjs macos`
+ou `node install.mjs ubuntu`.
+
+O instalador é repetível, mas **não substitui arquivos, links diferentes nem uma
+configuração gerada divergente**; ele interrompe e informa o conflito. Preserve
+e compare ajustes pessoais antes de qualquer mudança manual. Se atualizou os
+perfis e o arquivo gerado já existe, revise eventuais ajustes exclusivos e use
+`node apply-mcps.mjs macos` ou `node apply-mcps.mjs ubuntu` no clone; esse
+comando substitui o arquivo gerado. Para desfazer uma instalação, remova somente
+os links criados depois de conferir seus destinos e preserve arquivos pessoais.
+
+O Git não recria sozinho o ambiente completo:
+
+- Instale o OpenCode e configure autenticação dos providers, como OpenAI, em
+  cada instalação quando necessário. Contas, sessões, `service.json`, credenciais
+  e chaves SSH não são versionados nem copiados pelo instalador.
+- No Ubuntu, mantenha `nvm` com Node `default`, o `mcp-suite` e seu launcher
+  compilado, configuração privada do Bitbucket, token privado do Pentest e os
+  serviços/coordenador necessários nos caminhos dos perfis. Veja as seções abaixo
+  e a documentação do `mcp-suite`; o instalador não provisiona esses serviços.
+- No Mac, configure o alias SSH `emfforserver-local` com autenticação não
+  interativa para o Ubuntu. Os MCPs remotos dependem do servidor ligado e
+  acessível. Se habilitar o REA local, configure também `fnm` e Node `default`.
+- Confira `opencode mcp list` e `/mcps`; após alterações, use `/reload` se
+  necessário. `connected` confirma a conexão MCP, não a disponibilidade da VPN
+  nem a autenticação dos providers.
+
+Teste isolado: `node --test install.test.mjs apply-mcps.test.mjs pentest-http-bridge.test.mjs`.
+
 ## Onde configurar
 
 - **Ligar/desligar MCPs no Mac:** edite `configs/mcps-macos.jsonc`.
@@ -126,10 +168,10 @@ o script. Não substituir políticas/settings/token do Pentest nem reiniciar o g
 Este repositório (`emffor/opencode-config`) é usado pelo OpenCode tanto no
 servidor Ubuntu quanto no Mac:
 
-| Ambiente | Diretório do repositório e da configuração | Perfil versionado |
+| Ambiente | Repositório (exemplo) e configuração global | Perfil versionado |
 | --- | --- | --- |
-| Ubuntu — servidor `emfforserver`, usuário `administrador` | `/home/administrador/.config/opencode` | `configs/ubuntu.jsonc` |
-| macOS — usuário `emffor` | `/Users/emffor/.config/opencode` | `configs/macos.jsonc` |
+| Ubuntu — servidor `emfforserver`, usuário `administrador` | `~/opencode-config` → `~/.config/opencode` | `configs/ubuntu.jsonc` |
+| macOS — usuário `emffor` | `~/opencode-config` → `~/.config/opencode` | `configs/macos.jsonc` |
 
 As alterações neste repositório devem preservar a compatibilidade dos dois
 ambientes. Caminhos, comandos e MCPs específicos de um sistema devem ficar no
